@@ -1,0 +1,111 @@
+<div id="survey" class="modal fade" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Do you want to help us further?</h4>
+      </div>
+      <div class="modal-body">
+          <p>
+              Thank you for contributing one task for the project.
+              We are interested in knowing how you found out about us.
+          </p>
+          <p>
+              Could you please answer two questions in a short survey?
+          </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Skip</button>
+        <a class="btn btn-large btn-success" href="https://docs.google.com/forms/d/1Foe1CCfd4K_ZmtX2W8MDsoSjjDi5zd5DLgG7yRVn2HQ/viewform?embedded=true">Of course! Take me to the survey!</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div id="survey25" class="modal fade" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Congratulations! You have completed 25 tasks!</h4>
+      </div>
+      <div class="modal-body">
+          <p>
+              Thank you for contributing 25 tasks for the project. Now that you
+              have been using MicroPasts for a while, we would like to know how
+              you found it.
+          </p>
+          <p>
+              Could you please answer a few questions in a short survey?
+          </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Skip</button>
+        <a class="btn btn-large btn-success" href="https://docs.google.com/forms/d/1WTVapZ2Qdq0AIRazG-onDrVYDtb9xAnid7LwLrR3Uqw/viewform?embedded=true">Of course! Take me to the survey!</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div style="display:none;margin-top:15px; height:500px;" id="oldbrowser" class="row">
+    <!-- Success and Error Messages for the user -->
+    <div  class="col-md-8 col-md-offset-1 alert alert-info">
+        <h2>
+            Browser problems!
+        </h2>
+        <p>
+            Sorry, but your browser does not support the current application.
+            If you want to contribute, please, upgrade to a modern web browser
+            like the open source and free alternative
+            <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> or
+            <a href="https://www.google.com/intl/en/chrome/browser/">Chrome</a>.
+        </p>
+    </div>
+</div>
+<!-- End of Row -->
+
+<div style="margin-top:15px;">
+    <div id="success" class="alert alert-success" style="display:none;">
+        <strong>Well done!</strong> You have successfully submitted your transcription. Here is another to try if you wish!
+    </div>
+    <div id="loading" class="alert alert-info" style="display:none;">
+        <img src="/static/img/loading.gif">Loading next task...
+    </div>
+    <div id="taskcompleted" class="alert alert-info" style="display:none;">
+        <strong>The task has been completed!</strong> Thanks a lot!
+    </div>
+    <div id="finish" class="alert alert-success" style="display:none;">
+        <h2>
+            Congratulations!
+        </h2>
+        <p>
+            You have participated in <strong>all</strong> available tasks! Thank you for your interest and help.
+        </p>
+        <br/>
+        <img src="https://crowdfunded.micropasts.org/assets/logo-head.png" width="200" height="200"/>
+        <div class="alert-actions">
+            <a class="btn-default btn" href="/">Go back</a>
+            <a class="btn-default btn" href="/app">or, Check other applications</a>
+        </div>
+    </div>
+
+    <div id="error" class="alert alert-error" style="display:none;">
+        <a class="close">X.</a>
+        <strong>Error!</strong> Something went wrong, please contact the site
+        administrators via the forum, Twitter, email or our Facebook page.
+    </div>
+</div> <!-- End Success and Error Messages for the user -->
+
+<!--
+    Task DOM for loading the Flickr Images
+    It uses the class="skeleton" to identify the elements that belong to the
+    task.
+-->
+
+<!-- Start Skeleton Row-->
+<div class="row skeleton">
+
+</div>
+
+<!-- End of skeleton -->
