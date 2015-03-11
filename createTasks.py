@@ -150,7 +150,7 @@ def run(app_config, options):
         print('Running against PyBosssa instance at: %s' % options.api_url)
         print('Using API-KEY: %s' % options.api_key)
 
-    if options.create_app or options.add_more_tasks:
+
         if options.create_app:
             try:
                 response = pbclient.create_app(app_config['name'],
