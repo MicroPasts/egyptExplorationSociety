@@ -1,3 +1,22 @@
+<link type="text/css" rel="stylesheet" href="http://annotorious.github.io/latest/themes/dark/annotorious-dark.css"/>
+<link rel="stylesheet" href="/static/vendor/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+
+<!-- Fancy box script -->
+<script src="/static/vendor/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+<!-- jQuery cookie -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js" type="text/javascript"></script>
+
+<!-- Annotorious -->
+<script src="http://annotorious.github.io/latest/annotorious.min.js" type="text/javascript"></script>
+<script src="http://annotorious.github.io/latest/anno-fancybox.min.js" type="text/javascript"></script>
+
+<!-- jquery ui -->
+<script src="https://code.jquery.com/ui/1.8.1/jquery-ui.min.js" type="text/javascript"></script>
+
+<!-- jquery form serializer -->
+<script src="/static/js/vendor/jquery.serializeJSON.min.js" type="text/javascript"></script>
+
 <div id="survey" class="modal fade" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -106,6 +125,249 @@
 <!-- Start Skeleton Row-->
 <div class="row skeleton">
 
+    <!-- Start of Question and Submission DIV -->
+
+    <!-- The button groups -->
+    <div class="btn-group pull-right">
+        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-eye-open"></i> Tutorial</button>
+        <a class="btn btn-info btn-sm" id="imgLink" target="_blank" data-toggle="tooltip" data-placement="top" title="Opens in a new window" href="http://community.micropasts.org/category/crowd-sourcing-support"><i class="glyphicon glyphicon-book"></i> Community Help</a>
+        <a id="raw" href="" class="btn btn-sm btn-info fancybox" ><i class="glyphicon glyphicon-picture"></i> Overlay</a>
+        <a id="flickr" rel="tooltip" target="_blank" data-toggle="tooltip" data-placement="top" title="Opens in a new window" href="" class="btn btn-sm btn-info"><i class="icon icon-flickr"></i> View on Flickr</a>
+        <a id="down" rel="tooltip" data-toggle="tooltip" data-placement="top" title="Only works for compliant browsers" download="" href="" class="btn btn-sm btn-info" ><i class="glyphicon glyphicon-download"></i> Download</a>
+    </div>
+
+    <!-- Annotator section -->
+    <div class="btn-group">
+        <button id="status" type="button" class="btn btn-default btn-type disabled" name="loading" value="loading">Loading photo</button>
+        <button id="reset" type="button" class="btn btn-default btn-type">Reset annotator</button>
+        <button id="skip" type="button" class="btn btn-default btn-type">Skip to form</button>
+    </div>
+
+    <!-- Start of Photo DIV (column) -->
+    <div class="row">
+        <div id="imgContainer" >
+             <span id="photo-link">
+                <img id="photo" src="/static/img/loading.gif" class="loadingIcon">
+             </span>
+        </div>
+    </div>
+    <!-- End of Photo DIV (column) -->
+
+    <div class="row">
+        <form id="phototagging" role="form">
+
+            <div class="form-group">
+                <label class="control-label" for="title">Title of image: </label>
+                <input type="text" name="title" id="title" class="form-control fields" placeholder="The ID number starts as " rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Look for ">
+            </div>
+            <a href="#" class="btn btn-default btn-type" id="top">Go back to top of image</a>
+
+            <div class="form-group">
+                <label class="control-label" for="objectNumber">Object number: </label>
+                <input type="text" name="title" id="objectNumber" class="form-control fields" >
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="negativeNumber">Negative number: </label>
+                <input type="text" name="title" id="negativeNumber" class="form-control fields" >
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="provenance">Provenance: </label>
+                <input type="text" name="title" id="provenance" class="form-control fields" >
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="distribution">Distribution: </label>
+                <input type="text" name="title" id="distribution" class="form-control fields" >
+            </div>
+
+            <hr />
+
+            <div class="form-group">
+                <label class="control-label" for="comments">Your Comments</label>
+                <textarea class="form-control fields" rows="5" id="comments" name="comments" placeholder="Add any comments you may have about the photo or your experience with this task."></textarea>
+             </div>
+
+            <div class="btn-group">
+                <button class="btn btn-success btn-answer" value='Yes'><i class="icon icon-white icon-save"></i> Submit your answer</button>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="row">
+        <!-- Feedback items for the user -->
+        <p>
+            You are working now on task: <span id="task-id" class="label label-warning">#</span>
+        </p>
+
+        <p>
+            You have completed: <span id="done" class="label label-info"></span> tasks from
+            <!-- Progress bar for the user -->
+            <span id="total" class="label label-inverse"></span></p>
+        <div class="progress progress-striped">
+            <div id="progress" class="progress-bar" role="progressbar" title="#" style="width:0%;"></div>
+        </div>
+    </div>
+
 </div>
 
 <!-- End of skeleton -->
+<script type="text/javascript">
+        $(document).ready(function() {
+            $("#acti").tooltip({
+                placement: $(this).data("placement") || 'top'
+            });
+            $( "#reset" ).on( "click", function() {
+              	anno.removeAll();
+  				console.log('Reset fired');
+			});
+    		$('html, body').animate({
+        		scrollTop: $("#title").offset().top
+    			}, 500);
+			});
+            $("#top").click(function() {
+    		$('html, body').animate({
+        		scrollTop: $("#step1").offset().top
+    			}, 500);
+			});
+        });
+</script>
+
+ <!-- Load user progress -->
+ <script type="text/javascript">
+    function loadUserProgress() {
+        pybossa.userProgress('eesAmarna').done(function(data){
+            console.log("Total answers done for user: " + data.done);
+            if ((data.done == 1) && ($.cookie('eesAmarnaSurvey') == undefined)){
+               $("#survey").modal('show');
+               $.cookie('eesAmarnaSurvey', 'shown', { path: '/'});
+            }
+            if ((data.done >= 25) && ($.cookie('eesAmarnaSurvey25') == undefined)){
+                $("#survey25").modal('show');
+                $.cookie('eesAmarnaSurvey25', 'shown', { path: '/'});
+            }
+            var pct = Math.round((data.done*100)/data.total);
+            $("#progress").css("width", pct.toString() +"%");
+            $("#progress").attr("title", pct.toString() + "% completed!");
+            $("#progress").tooltip({'placement': 'left'});
+            $("#total").text(data.total);
+            $("#done").text(data.done);
+            $('a[rel]').tooltip({'placement': 'left'});
+        });
+    }
+    pybossa.taskLoaded(function(task, deferred) {
+        if ( ! $.isEmptyObject(task) ) {
+            loadUserProgress();
+            // load image from flickr
+          var img = $('<img width="100%" style="height:auto;" />');
+            img.load(function() {
+                // continue as soon as the image is loaded
+                deferred.resolve(task);
+                $("#status").text("Photo loaded!");
+            });
+
+            img.attr('src', task.info.url_b);
+            img.attr('id', 'anno_' + task.id);
+            img.addClass('img-polaroid');
+            img.addClass('annotable');
+            task.info.image = img;
+        }
+        else {
+            deferred.resolve(task);
+        }
+    });
+      $(window).resize(function(){
+        console.log('Window resized');
+      });
+
+    pybossa.presentTask(function(task, deferred) {
+        if ( !$.isEmptyObject(task) ) {
+            $('#photo-link').html('').append(task.info.image);
+            $('#task-id').html(task.id);
+            $("a#raw").attr("href", task.info.url_b);
+            $("a#flickr").attr("href", task.info.link + '/sizes/k/');
+            $("a#down").attr("download", task.id);
+            $("a#down").attr("href", task.info.url_b );
+            $(".fancybox").fancybox();
+            $('#imgLink').tooltip();
+            $("[rel=tooltip]").tooltip();
+            $("#btn-submit").removeClass("btn-success");
+
+            anno.makeAnnotatable(document.getElementById('anno_' + task.id));
+            anno.addHandler('onAnnotationCreated', function(annotation) {
+                console.log(annotation.text);
+                $("#btn-submit").html("<i class='icon icon-save'></i> Save current annotations");
+                $("#btn-submit").addClass("btn-success");
+            });
+            $('.btn-answer').off('click').on('click', function(evt) {
+                var answer = $(evt.target).attr("value");
+                if (typeof answer != 'undefined') {
+                    console.log(answer);
+                    task.answer = $("#phototagging").serializeJSON();
+
+                    task.answer.title = $('#title').val();
+                    task.answer.objectNumber = $('#objectNumber').val();
+                    task.answer.negativeNumber = $('#negativeNumber').val();
+                    task.answer.provenance = $('#provenance').val();
+                    task.answer.distribution = $('#distribution').val();
+                    task.answer.comments = $('#comments').val();
+                    task.answer.annotations = anno.getAnnotations();
+                    console.log(task.answer);
+                    pybossa.saveTask(task.id, task.answer).done(function() {
+                        $("html, body").animate({ scrollTop: 0 }, "slow");
+                        $("#success").fadeIn(500).fadeOut(500);
+                        $("#loading").fadeIn(500).fadeOut(500);
+                        deferred.resolve();
+                    });
+
+                    $('.fields').val('');
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                } else {
+                    $("#error").show();
+                }
+            });
+            $("#loading").hide();
+        } else {
+            $(".skeleton").hide();
+            $("#loading").hide();
+            $("#finish").fadeIn(500);
+        }
+    });
+    pybossa.run('eesAmarna');
+    </script>
+
+<!-- App specific styles -->
+<style>
+    .messageMargin {
+        margin-top: 15px;
+    }
+    .loadingIcon {
+        max-width:100%;
+    }
+    .none {
+        display:none;
+    }
+    .ui-autocomplete {
+        background-color: white;
+        width: 300px;
+        border: 1px solid #cfcfcf;
+        list-style-type: none;
+        padding: 10px;
+    }
+    .multiselect-container {
+        max-height: 250px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    #map {
+        height:400px;
+        width:100%;
+        margin-top: 15px;
+    }
+    #keywords .btn-group {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+</style>
