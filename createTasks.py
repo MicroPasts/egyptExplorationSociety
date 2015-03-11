@@ -153,6 +153,8 @@ def run(app_config, options):
         except:
             format_error("pbclient.create_task", response)
 
+    pbclient.set('api_key', options.api_key)
+    pbclient.set('endpoint', options.api_url)
 
     if options.verbose:
         print('Running against PyBosssa instance at: %s' % options.api_url)
