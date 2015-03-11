@@ -159,7 +159,6 @@
                     <label class="control-label" for="title">Title of image: </label>
                     <input type="text" name="title" id="title" class="form-control fields" placeholder="The ID number starts as " rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Look for ">
                 </div>
-                <a href="#" class="btn btn-default btn-type" id="top">Go back to top of image</a>
 
                 <div class="form-group">
                     <label class="control-label" for="objectNumber">Object number: </label>
@@ -222,15 +221,6 @@
             $( "#reset" ).on( "click", function() {
               	anno.removeAll();
   				console.log('Reset fired');
-			});
-    		$('html, body').animate({
-        		scrollTop: $("#title").offset().top
-    			}, 500);
-			});
-            $("#top").click(function() {
-    		$('html, body').animate({
-        		scrollTop: $("#step1").offset().top
-    			}, 500);
 			});
         });
 </script>
