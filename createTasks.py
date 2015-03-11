@@ -19,7 +19,6 @@
 import json
 from optparse import OptionParser
 import pbclient
-from get_images import get_flickr_set_photos
 import random
 import logging
 import time
