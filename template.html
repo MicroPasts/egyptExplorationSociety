@@ -142,58 +142,58 @@
         <button id="reset" type="button" class="btn btn-default btn-type">Reset annotator</button>
         <button id="skip" type="button" class="btn btn-default btn-type">Skip to form</button>
     </div>
-
-    <!-- Start of Photo DIV (column) -->
     <div class="row">
-        <div id="imgContainer" >
+        <!-- Start of Photo DIV (column) -->
+        <div class="col-md-6">
+            <div id="imgContainer" >
              <span id="photo-link">
                 <img id="photo" src="/static/img/loading.gif" class="loadingIcon">
              </span>
+            </div>
         </div>
-    </div>
-    <!-- End of Photo DIV (column) -->
+        <!-- End of Photo DIV (column) -->
+        <div class="col-md-6">
+            <form id="phototagging" role="form">
 
-    <div class="row">
-        <form id="phototagging" role="form">
+                <div class="form-group">
+                    <label class="control-label" for="title">Title of image: </label>
+                    <input type="text" name="title" id="title" class="form-control fields" placeholder="The ID number starts as " rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Look for ">
+                </div>
+                <a href="#" class="btn btn-default btn-type" id="top">Go back to top of image</a>
 
-            <div class="form-group">
-                <label class="control-label" for="title">Title of image: </label>
-                <input type="text" name="title" id="title" class="form-control fields" placeholder="The ID number starts as " rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Look for ">
-            </div>
-            <a href="#" class="btn btn-default btn-type" id="top">Go back to top of image</a>
+                <div class="form-group">
+                    <label class="control-label" for="objectNumber">Object number: </label>
+                    <input type="text" name="title" id="objectNumber" class="form-control fields" >
+                </div>
 
-            <div class="form-group">
-                <label class="control-label" for="objectNumber">Object number: </label>
-                <input type="text" name="title" id="objectNumber" class="form-control fields" >
-            </div>
+                <div class="form-group">
+                    <label class="control-label" for="negativeNumber">Negative number: </label>
+                    <input type="text" name="title" id="negativeNumber" class="form-control fields" >
+                </div>
 
-            <div class="form-group">
-                <label class="control-label" for="negativeNumber">Negative number: </label>
-                <input type="text" name="title" id="negativeNumber" class="form-control fields" >
-            </div>
+                <div class="form-group">
+                    <label class="control-label" for="provenance">Provenance: </label>
+                    <input type="text" name="title" id="provenance" class="form-control fields" >
+                </div>
 
-            <div class="form-group">
-                <label class="control-label" for="provenance">Provenance: </label>
-                <input type="text" name="title" id="provenance" class="form-control fields" >
-            </div>
+                <div class="form-group">
+                    <label class="control-label" for="distribution">Distribution: </label>
+                    <input type="text" name="title" id="distribution" class="form-control fields" >
+                </div>
 
-            <div class="form-group">
-                <label class="control-label" for="distribution">Distribution: </label>
-                <input type="text" name="title" id="distribution" class="form-control fields" >
-            </div>
+                <hr />
 
-            <hr />
+                <div class="form-group">
+                    <label class="control-label" for="comments">Your Comments</label>
+                    <textarea class="form-control fields" rows="5" id="comments" name="comments" placeholder="Add any comments you may have about the photo or your experience with this task."></textarea>
+                </div>
 
-            <div class="form-group">
-                <label class="control-label" for="comments">Your Comments</label>
-                <textarea class="form-control fields" rows="5" id="comments" name="comments" placeholder="Add any comments you may have about the photo or your experience with this task."></textarea>
-             </div>
+                <div class="btn-group">
+                    <button class="btn btn-success btn-answer" value='Yes'><i class="icon icon-white icon-save"></i> Submit your answer</button>
+                </div>
 
-            <div class="btn-group">
-                <button class="btn btn-success btn-answer" value='Yes'><i class="icon icon-white icon-save"></i> Submit your answer</button>
-            </div>
-
-        </form>
+            </form>
+        </div>
     </div>
 
     <div class="row">
