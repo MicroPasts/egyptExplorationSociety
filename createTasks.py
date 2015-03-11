@@ -19,6 +19,7 @@
 import json
 from optparse import OptionParser
 import pbclient
+from get_images import get_flickr_set_photos
 import random
 import logging
 import time
@@ -60,11 +61,6 @@ def handle_arguments():
                       help="Update Tasks n_answers",
                       metavar="UPDATE-TASKS")
 
-    parser.add_option("-x", "--extra-task", action="store_true",
-                      dest="add_more_tasks",
-                      help="Add more tasks",
-                      metavar="ADD-MORE-TASKS")
-
     # Modify the number of TaskRuns per Task
     # (default 2)
     # Changed default to 2 on the 19th August
@@ -73,7 +69,7 @@ def handle_arguments():
                       dest="n_answers",
                       help="Number of answers per task",
                       metavar="N-ANSWERS",
-                      default=2)
+                      default=3)
 
     parser.add_option("-a", "--application-config",
                       dest="app_config",
@@ -84,8 +80,13 @@ def handle_arguments():
     parser.add_option("-v", "--verbose", action="store_true", dest="verbose")
     (options, args) = parser.parse_args()
 
-    if not options.create_app and not options.update_template:
+    if not options.create_app and not options.update_template\
+            and not options.update_tasks:
         parser.error("Please check --help or -h for the available options")
+
+    if not options.api_key:
+        parser.error("You must supply an API-KEY to create an \
+                      application and tasks in PyBossa")
 
     return options
 
@@ -131,9 +132,7 @@ def run(app_config, options):
     def setup_app():
         app = find_app_by_short_name()
         app.long_description = contents('long_description.html')
-        # Set to Egyptian archaeology
         app.category_id = 10
-        # Make hidden
         app.hidden = 1
         app.info['task_presenter'] = contents('template.html')
         app.info['thumbnail'] = app_config['thumbnail']
@@ -146,11 +145,21 @@ def run(app_config, options):
         except:
             format_error("pbclient.update_app", response)
 
+    def create_photo_task(app, photo, question, priority=0):
+        # Data for the tasks
+        task_info = photo
+        try:
+            response = pbclient.create_task(app.id, task_info, priority_0=priority)
+            check_api_error(response)
+        except:
+            format_error("pbclient.create_task", response)
+
+
     if options.verbose:
         print('Running against PyBosssa instance at: %s' % options.api_url)
         print('Using API-KEY: %s' % options.api_key)
 
-
+    if options.create_app:
         if options.create_app:
             try:
                 response = pbclient.create_app(app_config['name'],
@@ -163,7 +172,6 @@ def run(app_config, options):
                 format_error("pbclient.create_app", response)
         else:
             app = find_app_by_short_name()
-        add_photo_tasks(app)
 
     if options.update_template:
         print "Updating app template"
