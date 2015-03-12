@@ -357,8 +357,8 @@ Modernizr.load({
 <script type="text/javascript">
     pybossa.taskLoaded(function(task, deferred) {
         if ( ! $.isEmptyObject(task) ) {
-            // loadUserProgress();
-            // load image from flickr
+          loadUserProgress();
+          console.log('Load progress fired');
           var img = $('<img width="100%" style="height:auto;" />');
             img.load(function() {
                 // continue as soon as the image is loaded
@@ -380,8 +380,7 @@ Modernizr.load({
 <script type="text/javascript">
     pybossa.presentTask(function(task, deferred) {
         if ( !$.isEmptyObject(task) ) {
-            loadUserProgress();
-            console.log('Load progress fired');
+
             console.log(task);
             $('#photo-link').html('').append(task.info.image);
             $('#task-id').html(task.id);
