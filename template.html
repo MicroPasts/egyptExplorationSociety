@@ -357,7 +357,6 @@ Modernizr.load({
 <script type="text/javascript">
     pybossa.taskLoaded(function(task, deferred) {
         if ( ! $.isEmptyObject(task) ) {
-            console.log('Load progress fired');
             //loadUserProgress();
             // load image from flickr
           var img = $('<img width="100%" style="height:auto;" />');
@@ -382,6 +381,7 @@ Modernizr.load({
     pybossa.presentTask(function(task, deferred) {
         if ( !$.isEmptyObject(task) ) {
             loadUserProgress();
+            console.log('Load progress fired');
             console.log(task);
             $('#photo-link').html('').append(task.info.image);
             $('#task-id').html(task.id);
