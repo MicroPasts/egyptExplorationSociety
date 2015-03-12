@@ -335,14 +335,6 @@ Modernizr.load({
     function loadUserProgress() {
         pybossa.userProgress('eesAmarna').done(function(data){
             console.log("Total answers done for user: " + data.done);
-            if ((data.done == 1) && ($.cookie('eesAmarnaSurvey') == undefined)){
-               $("#survey").modal('show');
-               $.cookie('eesAmarnaSurvey', 'shown', { path: '/'});
-            }
-            if ((data.done >= 25) && ($.cookie('eesAmarnaSurvey25') == undefined)){
-                $("#survey25").modal('show');
-                $.cookie('eesAmarnaSurvey25', 'shown', { path: '/'});
-            }
             var pct = Math.round((data.done*100)/data.total);
             $("#progress").css("width", pct.toString() +"%");
             $("#progress").attr("title", pct.toString() + "% completed!");
@@ -357,8 +349,6 @@ Modernizr.load({
 <script type="text/javascript">
     pybossa.taskLoaded(function(task, deferred) {
         if ( ! $.isEmptyObject(task) ) {
-          loadUserProgress();
-          console.log('Load progress fired');
           var img = $('<img width="100%" style="height:auto;" />');
             img.load(function() {
                 // continue as soon as the image is loaded
@@ -370,6 +360,7 @@ Modernizr.load({
             img.addClass('img-polaroid');
             img.addClass('annotable');
             task.info.image = img;
+            console.log('Task ID: ' + task.id);
         }
         else {
             deferred.resolve(task);
@@ -380,7 +371,7 @@ Modernizr.load({
 <script type="text/javascript">
     pybossa.presentTask(function(task, deferred) {
         if ( !$.isEmptyObject(task) ) {
-
+            loadUserProgress();
             console.log(task);
             $('#photo-link').html('').append(task.info.image);
             $('#task-id').html(task.id);
