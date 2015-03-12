@@ -168,7 +168,7 @@
 
                 <div class="form-group">
                     <label class="control-label" for="objectNumber">Object number: </label>
-                    <input type="text" name="objectNumber" id="objectNumber" class="form-control fields" placeholder="The object number is generally in the top right corner " aria-describedby="helpBlock">
+                    <input type="text" name="objectNumber" id="objectNumber" class="form-control fields" placeholder="The object number is generally in the top right corner " >
                     <span id="helpBlock" class="help-block">The final number will be generated to match the EES convention of TA.OC.30-31.XXX. So just enter the digits you see on the image.</span>
                 </div>
 
@@ -176,8 +176,6 @@
                     <label class="control-label" for="negativeNumber">Negative number: </label>
                     <input type="text" name="negativeNumber" id="negativeNumber" class="form-control fields" placeholder="Negative number is in format 'Neg. = 0.13'" >
                 </div>
-
-
 
                 <div class="form-group">
                     <label class="control-label" for="distribution">Distribution: </label>
@@ -383,6 +381,7 @@
             $('#imgLink').tooltip();
             $("[rel=tooltip]").tooltip();
             $("#btn-submit").removeClass("btn-success");
+
             anno.makeAnnotatable(document.getElementById('anno_' + task.id));
             anno.addHandler('onAnnotationCreated', function(annotation) {
                 console.log(annotation.text);
@@ -396,7 +395,7 @@
                     task.answer = $("#phototagging").serializeJSON();
 
                     task.answer.title = $('#title').val();
-                    task.answer.objectNumber = '$('#objectNumber').val();
+                    task.answer.objectNumber = $('#objectNumber').val();
                     task.answer.negativeNumber = $('#negativeNumber').val();
                     task.answer.provenance = $('#provenance').val();
                     task.answer.distribution = $('#distribution').val();
