@@ -357,7 +357,7 @@ Modernizr.load({
 <script type="text/javascript">
     pybossa.taskLoaded(function(task, deferred) {
         if ( ! $.isEmptyObject(task) ) {
-            //loadUserProgress();
+            // loadUserProgress();
             // load image from flickr
           var img = $('<img width="100%" style="height:auto;" />');
             img.load(function() {
@@ -400,6 +400,7 @@ Modernizr.load({
             });
             $('.btn-answer').off('click').on('click', function(evt) {
                 var answer = $(evt.target).attr("value");
+                console.log(typeof answer);
                 if (typeof answer != 'undefined') {
                     console.log(answer);
                     task.answer = $("#phototagging").serializeJSON();
@@ -413,10 +414,10 @@ Modernizr.load({
                     task.answer.annotations = anno.getAnnotations();
                     console.log(task.answer);
                     pybossa.saveTask(task.id, task.answer).done(function() {
+                        deferred.resolve();
                         $("html, body").animate({ scrollTop: 0 }, "slow");
                         $("#success").fadeIn(500).fadeOut(500);
                         $("#loading").fadeIn(500).fadeOut(500);
-                        deferred.resolve();
                         $('.fields').val('');
                     });
                 } else {
