@@ -389,10 +389,9 @@ Modernizr.load({
                 $(".btn-answer").addClass("btn-success");
             });
             $('.btn-answer').off('click').on('click', function(evt) {
+                evt.preventDefault();
                 var answer = $(evt.target).attr("value");
-                console.log(typeof answer);
                 if (typeof answer != 'undefined') {
-                    console.log(answer);
                     task.answer = $("#phototagging").serializeJSON();
                     task.answer.title = $('#title').val();
                     task.answer.objectNumber = $('#objectNumber').val();
@@ -404,11 +403,11 @@ Modernizr.load({
                     task.answer.annotations = anno.getAnnotations();
                     console.log(task.answer);
                     pybossa.saveTask(task.id, task.answer).done(function() {
-                        deferred.resolve();
                         $("html, body").animate({ scrollTop: 0 }, "slow");
                         $("#success").fadeIn(500).fadeOut(500);
                         $("#loading").fadeIn(500).fadeOut(500);
                         $('.fields').val('');
+                        deferred.resolve();
                     });
                 } else {
                     $("#error").show();
