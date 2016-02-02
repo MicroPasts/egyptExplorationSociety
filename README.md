@@ -1,6 +1,8 @@
 Photographic transcription of the Egypt Exploration Society Archives
 ====================================================================
 
+[![DOI](https://zenodo.org/badge/19055/MicroPasts/egyptExplorationSociety.svg)](https://zenodo.org/badge/latestdoi/19055/MicroPasts/egyptExplorationSociety)
+
 An application for interacting with the Egypt Exploration Society Flickr stream to produce structured, transcribed data
 from their rich image archive.
 
@@ -84,7 +86,3 @@ Acknowledgments
 
 This application is on behalf of the Egypt Exploration Society.
 [![EES logo](http://www.ees.ac.uk/images/logo.gif)](http://www.ees.ac.uk)
-
-
-
-
